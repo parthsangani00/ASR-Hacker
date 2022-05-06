@@ -5,15 +5,27 @@ import editdistance
 def checkKeywordSpecialChar(token):
     '''
         gives a boolean response true if the token is a keyword or special character
+    [Select, From, Where, Order By, Group By, Natural Join, And, Or, Not, Limit, Between, In, Sum, Count, Max, Avg, Min]
+    [* = < > ( ) . ,]
     '''
-    pass
+    keywords = ["select","from","where"]
+    specialCharacters = ["="]
+    token = token.lower()
+    if (token in keywords) or (token in specialCharacters):
+        return True
+    else:
+        return False
 
 
-def rightMostNonLiteral(token, translatedOutput):
+def rightMostNonLiteral(token, startIndex, translatedOutput):
     '''
         gives right most non literal after the token in the translated output
     '''
-    pass
+    endIndex = startIndex
+    while (endIndex<len(translatedOutput)) and (not checkKeywordSpecialChar(translatedOutput[endIndex])):
+        endIndex+=1  
+    
+    return endIndex
 
 
 def phoneticRepresentation(token):
@@ -29,17 +41,20 @@ def enumerateStrings(startIndex, endIndex, translatedOutput):
     '''
     A = []
     positions = []
-    i = 0
+    i = startIndex
     windowSize = endIndex - startIndex
 
     while(i<endIndex):
+
         j = i
         k = 0
         currentString = ""
 
-        while (not checkKeywordSpecialChar(translatedOutput[j])) and (j<endIndex) and (k<windowSize):
+        while (j<endIndex) and (k<windowSize) and (not checkKeywordSpecialChar(translatedOutput[j])):
             currentString = currentString + translatedOutput[j]
-            A.append(phoneticRepresentation(currentString))
+            # A.append(phoneticRepresentation(currentString))
+            # slight variation from original pseudocode since phonetic representations are not available
+            A.append(currentString)
             positions.append(j)
             j+=1
             k+=1
@@ -52,9 +67,15 @@ def enumerateStrings(startIndex, endIndex, translatedOutput):
 def retrieveCategory(token):
     '''
         gives the set of all possible literals corresponding to the category of the token.
-        the token categories are table_name, attribute_name, attribute_value
+        the token categories are tableName, attributeName, attributeValue
     '''
-    pass
+    # generate the dictionary below from an actual database
+    dic={}
+    dic["tableName"] = ["Employees", "Salaries"]
+    dic["attributeName"] = ["FirstName", "LastName"]
+    dic["attributeValue"] = ["John", "Parth", "Shreyas", "Kritti"]
+
+    return dic[token]
 
 
 def editDistance(a,b):
@@ -74,23 +95,22 @@ def literalAssignment(A, B, positions):
         count[b] = 0
         location[b] = -1
 
-    for a in A:
-        possibleLiteralsIndex = []
+    for aIndex in range(len(A)):
+        a = A[aIndex]
+        possibleLiterals = []
         minEditDistance = inf
 
-        for bIndex in range(len(B)):
-            b = B[bIndex]
+        for b in B:
             if editDistance(a,b) < minEditDistance:
-                possibleLiteralsIndex = []
-                possibleLiteralsIndex.append(bIndex)
+                possibleLiterals = []
+                possibleLiterals.append(b)
                 minEditDistance = editDistance(a,b)
-            elif editDistance(a,b) < minEditDistance:
-                possibleLiteralsIndex.append(bIndex)
-        
-        for bIndex in possibleLiteralsIndex:
-            b = B[bIndex]
+            elif editDistance(a,b) == minEditDistance:
+                possibleLiterals.append(b)
+
+        for b in possibleLiterals:
             count[b] += 1
-            location[b] = max(location[b], positions[bIndex])
+            location[b] = max(location[b], positions[aIndex])
 
     maxCountLiteral=None
     maxCount = -1
@@ -98,9 +118,7 @@ def literalAssignment(A, B, positions):
         if count[b] > maxCount:
             maxCount = count[b]
             maxCountLiteral = b
-    
-    position = location[b]
-
+    position = location[maxCountLiteral]
     return maxCountLiteral, position
 
 
@@ -115,9 +133,16 @@ def literalFinder(translatedOutput, bestStructure):
         token = translatedOutput[idx]
         if not checkKeywordSpecialChar(token):
             startIndex = idx
-            endIndex = rightMostNonLiteral(token, translatedOutput)
+            endIndex = rightMostNonLiteral(token, startIndex, translatedOutput)
             A, positions = enumerateStrings(startIndex, endIndex, translatedOutput)
-            B = retrieveCategory(token)
+
+            if (translatedOutput[idx-1].lower() == "select") or (translatedOutput[idx-1].lower() == "where"):
+                B = retrieveCategory("attributeName")
+            elif translatedOutput[idx-1].lower() == "from":
+                B = retrieveCategory("tableName")
+            elif translatedOutput[idx-1].lower() == "=":
+                B = retrieveCategory("attributeValue")
+
             literal, position = literalAssignment(A, B, positions)
             finalOutput.append(literal)
             idx = position + 1
@@ -127,3 +152,12 @@ def literalFinder(translatedOutput, bestStructure):
     
     return finalOutput
 
+# Example 1
+translatedOutput = ["Select", "first", "name", "from", "Employers"]
+bestStructure = ["Select", "x1", "from", "x2"]
+print(literalFinder(translatedOutput, bestStructure))
+
+# Example 2
+translatedOutput = ["Select", "first", "name", "from", "Employers", "where", "first", "name", "=", "Jon"]
+bestStructure = ["Select", "x1", "from", "x2", "where", "x3", "=", "x4"]
+print(literalFinder(translatedOutput, bestStructure))
