@@ -15,7 +15,7 @@ An implementation of the "Literal Determination" part of the paper : https://dl.
 
 1. python3 literalFinder.py : The dictionary which contains the table names, attribute names and attribute values is manually loaded inside the code.
 
-2. python3 generatePickle.py : It generates 2 pickle files, data.pkl corresponding to databases in the "Database-CSV" directory. These are dummy databases handcrafter by us. The second file, data-large.pkl corresponds to databases in "Database-CSV-Large" directory, these are real databases.
+2. python3 generatePickle.py : It generates 2 pickle files, data.pkl corresponding to databases in the "Database-CSV" directory. These are dummy databases handcrafted by us. The second file, data-large.pkl corresponds to databases in "Database-CSV-Large" directory, these are real databases.
 
 3. python3 literalFinderWithCSV.py : It uses the "data.pkl" file generated from step 2 to read the table names, attribute names and attribute values.
 
