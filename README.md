@@ -23,6 +23,8 @@ An implementation of the "Literal Determination" part of the paper : https://dl.
 
 There are 8 example queries in literalFinder.py and literalFinderWithCSV.py, 6 example queries in literalFinderWithCSVLarge.py. The current output is as per expectations but since our implementation uses edit distance metric, it may so happen that you may get an output which deviates from expectation upon changing the query (especially when attribute values are involved)
 
+5. Note : The python modules required for the code to run is "editdistance", "pickle", "csv, "os". You can install them using pip3 if you don't have them already. The command is : pip3 install {module name}. 
+
 
 The database structure assumed by literalFinder.py file is as follows - 
 1. Employees.csv (ID,FirstName,LastName)
