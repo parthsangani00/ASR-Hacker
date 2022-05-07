@@ -201,7 +201,7 @@ print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 2
-translatedOutput = ["SELECT", "first", "name", "FROM", "Employers", "WHERE", "first", "name", "=", "Perth"]
+translatedOutput = ["SELECT", "first", "name", "FROM", "Employers", "WHERE", "first", "name", "=", "Pet"]
 print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "x1", "FROM", "x2", "WHERE", "x3", "=", "x4"]
 print("Input (Structure Determination) :", space.join(bestStructure))
@@ -247,8 +247,8 @@ print("-"*20)
 # print("-"*20)
 
 # Example 7
-translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id", "=", "slurry",\
-    ".", "employee_id", "ORDER", "BY", "slurry", ".", "solary", ",", "employers", ".", "id"]
+translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "employee_id", "=", "slurry",\
+    ".", "employee_id", "ORDER", "BY", "slurry", ".", "solary", ",", "employers", ".", "employee_id"]
 print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "*", "FROM", "x1", ",", "x2", "WHERE", "x3", ".", "x4", "=", "x5", ".", "x6",\
     "ORDER", "BY", "x7", ".", "x8", ",", "x9", ".", "x10"]
