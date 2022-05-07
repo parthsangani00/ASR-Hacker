@@ -191,72 +191,72 @@ print("-"*20)
 
 # Example 1
 translatedOutput = ["SELECT", "first", "name", "FROM", "Employers"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "x1", "FROM", "x2"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 2
 translatedOutput = ["SELECT", "first", "name", "FROM", "Employers", "WHERE", "first", "name", "=", "Jon"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "x1", "FROM", "x2", "WHERE", "x3", "=", "x4"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 3
 translatedOutput = ["SELECT", "last", "name", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id",\
     "=", "slurry", ".", "employee_id", "AND", "slurry", ".", "solary", ">", "fiftee"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "x1", "FROM", "x2", "WHERE", "x3", ".", "x4", "=", "x5", ".", "x6", "AND", "x7", ".", "x8",\
     ">", "x9"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 4
 translatedOutput = ["SELECT", "SUM", "(", "solary", ")", "FROM", "slurry"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "SUM", "(", "x1", ")", "FROM", "x2"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 5
 translatedOutput = ["SELECT", "SUM", "(", "slurry", ".", "solary", ")", "FROM", "slurry"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "SUM", "(", "x1", ".", "x2", ")", "FROM", "x3"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 6
 translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id", "=", "slurry",\
     ".", "employee_id", "AND", "slurry", ".", "solary", "BETWEEN", "thordee", "AND", "fortee"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "*", "FROM", "x1", ",", "x2", "WHERE", "x3", ".", "x4", "=", "x5", "x6", "AND",\
     "x7", ".", "x8", "BETWEEN", "x9", "AND", "x10"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 7
 translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id", "=", "slurry",\
     ".", "employee_id", "ORDER", "BY", "slurry", ".", "solary", ",", "employers", ".", "id"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "*", "FROM", "x1", ",", "x2", "WHERE", "x3", ".", "x4", "=", "x5", ".", "x6",\
     "ORDER", "BY", "x7", ".", "x8", ",", "x9", ".", "x10"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 8
 translatedOutput = ["SELECT", "*", "FROM", "employers", "NATURAL", "JOIN", "slurry"]
-print("Input (ASR Transcription) : ", space.join(translatedOutput))
+print("Input (ASR Transcription) :", space.join(translatedOutput))
 bestStructure = ["SELECT", "*", "FROM", "x1", "NATURAL", "JOIN", "x2"]
-print("Input (Structure Determination) : ", space.join(bestStructure))
-print("Output : ", space.join(literalFinder(translatedOutput, bestStructure)))
+print("Input (Structure Determination) :", space.join(bestStructure))
+print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 
