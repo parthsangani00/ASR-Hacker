@@ -71,11 +71,11 @@ def retrieveCategory(token):
     '''
     # generate the dictionary below from an actual database
     
-    file = open('data.pkl', 'rb')
+    file = open('data-large.pkl', 'rb')
     data = pickle.load(file)
     file.close()
 
-    output = list(data[token])
+    output=list(data[token])
     output.sort()
     return output
 
@@ -209,14 +209,15 @@ print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 3
-translatedOutput = ["SELECT", "last", "name", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id",\
-    "=", "slurry", ".", "employee_id", "AND", "slurry", ".", "solary", ">", "fiftee"]
-print("Input (ASR Transcription) :", space.join(translatedOutput))
-bestStructure = ["SELECT", "x1", "FROM", "x2", "WHERE", "x3", ".", "x4", "=", "x5", ".", "x6", "AND", "x7", ".", "x8",\
-    ">", "x9"]
-print("Input (Structure Determination) :", space.join(bestStructure))
-print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
-print("-"*20)
+# commenting because salary attribute in Salaries table has numbers
+# translatedOutput = ["SELECT", "last", "name", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id",\
+#     "=", "slurry", ".", "employee_id", "AND", "slurry", ".", "solary", ">", "fiftee"]
+# print("Input (ASR Transcription) :", space.join(translatedOutput))
+# bestStructure = ["SELECT", "x1", "FROM", "x2", "WHERE", "x3", ".", "x4", "=", "x5", ".", "x6", "AND", "x7", ".", "x8",\
+#     ">", "x9"]
+# print("Input (Structure Determination) :", space.join(bestStructure))
+# print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
+# print("-"*20)
 
 # Example 4
 translatedOutput = ["SELECT", "SUM", "(", "solary", ")", "FROM", "slurry"]
@@ -235,14 +236,15 @@ print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
 print("-"*20)
 
 # Example 6
-translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id", "=", "slurry",\
-    ".", "employee_id", "AND", "slurry", ".", "solary", "BETWEEN", "thordee", "AND", "fortee"]
-print("Input (ASR Transcription) :", space.join(translatedOutput))
-bestStructure = ["SELECT", "*", "FROM", "x1", ",", "x2", "WHERE", "x3", ".", "x4", "=", "x5", "x6", "AND",\
-    "x7", ".", "x8", "BETWEEN", "x9", "AND", "x10"]
-print("Input (Structure Determination) :", space.join(bestStructure))
-print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
-print("-"*20)
+# commenting because salary attribute in Salaries table has numbers
+# translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id", "=", "slurry",\
+#     ".", "employee_id", "AND", "slurry", ".", "solary", "BETWEEN", "thordee", "AND", "fortee"]
+# print("Input (ASR Transcription) :", space.join(translatedOutput))
+# bestStructure = ["SELECT", "*", "FROM", "x1", ",", "x2", "WHERE", "x3", ".", "x4", "=", "x5", "x6", "AND",\
+#     "x7", ".", "x8", "BETWEEN", "x9", "AND", "x10"]
+# print("Input (Structure Determination) :", space.join(bestStructure))
+# print("Output :", space.join(literalFinder(translatedOutput, bestStructure)))
+# print("-"*20)
 
 # Example 7
 translatedOutput = ["SELECT", "*", "FROM", "employers", ",", "slurry", "WHERE", "employers", ".", "id", "=", "slurry",\
